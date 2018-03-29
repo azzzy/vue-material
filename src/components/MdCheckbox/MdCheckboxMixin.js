@@ -5,14 +5,15 @@ export default {
     MdRipple
   },
   props: {
-    model: [String, Number, Boolean, Array],
+    model: [String, Boolean, Object, Number, Array],
     value: {
-      type: [String, Number, Boolean],
+      type: [String, Boolean, Object, Number],
       default: 'on'
     },
     name: [String, Number],
     required: Boolean,
-    disabled: Boolean
+    disabled: Boolean,
+    indeterminate: Boolean
   },
   model: {
     prop: 'model',
@@ -43,7 +44,8 @@ export default {
       return {
         'md-checked': this.isSelected,
         'md-disabled': this.disabled,
-        'md-required': this.required
+        'md-required': this.required,
+        'md-indeterminate': this.indeterminate
       }
     }
   },

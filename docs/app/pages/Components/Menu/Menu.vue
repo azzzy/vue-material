@@ -1,6 +1,7 @@
 <example src="./examples/Directions.vue" />
 <example src="./examples/Sizes.vue" />
 <example src="./examples/MenuAlignments.vue" />
+<example src="./examples/AutoClose.vue" />
 <example src="./examples/MultipleContent.vue" />
 
 <template>
@@ -34,6 +35,13 @@
     </div>
 
     <div class="page-container-section">
+      <h2>AutoClose</h2>
+
+      <p><code>md-menu</code> can be auto closed on click or select:</p>
+      <code-example title="Auto close menu on events" :component="examples['auto-close']" />
+    </div>
+
+    <div class="page-container-section">
       <h2>Rich Content and Icon Alignment</h2>
 
       <p>Sometimes you may need to toggle your menu dynamically. You can also show arbitrary content inside a <code>md-menu-content</code>, like this card example:</p>
@@ -43,6 +51,7 @@
       <api-item title="API - md-menu">
         <p>The following options can be used with any menu:</p>
         <api-table :headings="props.headings" :props="props.props" slot="props" />
+        <api-table :headings="events.headings" :props="events.props" slot="events" />
         <note-block tip>All <a href="https://router.vuejs.org/en/api/router-link.html" target="_blank">options</a> of <code>router-link</code> can be simply used here.</note-block>
       </api-item>
     </div>
@@ -68,6 +77,12 @@
             name: 'md-active',
             type: 'Boolean',
             description: 'Used to show/hide a menu programatically.',
+            defaults: 'false'
+          },
+          {
+            name: 'md-close-on-click',
+            type: 'Boolean',
+            description: 'When this options is true, the menu will be closed after any click event.',
             defaults: 'false'
           },
           {
@@ -172,7 +187,22 @@
             defaults: '-'
           }
         ]
-      }
+      },
+      events: {
+        headings: ['Name', 'Description', 'Value'],
+        props: [
+          {
+            name: 'md-opened',
+            description: 'Triggered when menu opens',
+            value: 'null'
+          },
+          {
+            name: 'md-closed',
+            description: 'Triggered when menu closes',
+            value: 'null'
+          }
+        ]
+      }      
     })
   }
 </script>

@@ -83,6 +83,10 @@
       },
       mdSelectable () {
         this.MdTable.selectingMode = this.mdSelectable
+      },
+      mdItem (after, before) {
+        this.removeSelectableItem(before)
+        this.$nextTick(this.addSelectableItem)
       }
     },
     methods: {
@@ -112,21 +116,19 @@
       },
       addSelectableItem () {
         if (!this.hasMultipleSelection || this.mdDisabled) {
-          return
+          return false
         }
 
         if (this.MdTable.selectable.includes(this.mdItem)) {
-          return
+          return false
         }
 
         this.MdTable.selectable.push(this.mdItem)
       },
-      removeSelectableItem () {
-        if (!this.hasMultipleSelection) {
-          return
+      removeSelectableItem (target = this.mdItem) {
+        if (this.mdSelectable === 'multiple') {
+          this.MdTable.selectable = this.MdTable.selectable.filter(item => item !== target)
         }
-
-        this.MdTable.selectable = this.MdTable.selectable.filter(item => item !== this.mdItem)
       }
     },
     created () {
